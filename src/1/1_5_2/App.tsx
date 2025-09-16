@@ -13,10 +13,14 @@ export type Person = {
 };
 
 function Avatar({ person, size }: { person: Person; size: number }) {
+  let thumbnailSize = 's';
+  if (size > 90) {
+    thumbnailSize = 'b';
+  }
   return (
     <img
       className="avatar"
-      src={getImageUrl(person, "b")}
+      src={getImageUrl(person, thumbnailSize)}
       alt={person.name}
       width={size}
       height={size}
