@@ -5,6 +5,7 @@
 
 const person = {
     name: 'Gregorio Y. Zara',
+    imageUrl: "GregorioYZara.jpg",
     theme: {
       backgroundColor: 'black',
       color: 'pink'
@@ -17,7 +18,7 @@ const person = {
         <h1>{person.name}'s Todos</h1>
         <img
           className="avatar"
-          src="GregorioYZara.jpg"
+          src={person.imageUrl}
           alt="Gregorio Y. Zara"
         />
         <ul>
