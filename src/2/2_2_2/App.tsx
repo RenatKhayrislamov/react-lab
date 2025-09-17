@@ -3,21 +3,23 @@
   Когда вы вводите текст в поля ввода, ничего не появляется. Как будто входные значения "застряли" с пустыми строками. "Значение" первого <input> установлено так, чтобы всегда соответствовать переменной firstName, а "значение" второго <input> установлено так, чтобы всегда соответствовать переменной lastName. Это правильно. Оба входа имеют обработчики событий onChange, которые пытаются обновить переменные на основе последнего введенного пользователем значения (e.target.value). Однако переменные, похоже, не "запоминают" свои значения между повторными рендерингами. Исправьте это, используя вместо них переменные состояния.
 */
 
+import { useState } from 'react';
+
 export default function Form() {
-  let firstName = '';
-  let lastName = '';
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   function handleFirstNameChange(e: any) {
-      firstName = e.target.value;
+    setFirstName(e.target.value);
   }
 
   function handleLastNameChange(e: any) {
-      lastName = e.target.value;
+    setLastName(e.target.value);
   }
 
   function handleReset() {
-      firstName = '';
-      lastName = '';
+    setFirstName('');
+    setLastName('');
   }
 
   return (
