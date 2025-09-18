@@ -30,7 +30,7 @@ export default function ContactList() {
       </label>
       <ul>
         {displayedContacts.map((contact, i) =>
-          <li key={i}>
+          <li key={contact.id}>
             <Contact contact={contact} />
           </li>
         )}
