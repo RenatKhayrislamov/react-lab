@@ -8,7 +8,7 @@ export default function Letter({
   }: {
     letter: LetterType,
     isHighlighted: boolean,
-    onHover: (letter: LetterType) => void,
+    onHover: (id: number) => void,
     onToggleStar: (letter: LetterType) => void,
   }
 ) {
@@ -18,10 +18,10 @@ export default function Letter({
           isHighlighted ? 'highlighted' : ''
         }
         onFocus={() => {
-          onHover(letter);        
+          onHover(letter.id);
         }}
         onPointerMove={() => {
-          onHover(letter);
+          onHover(letter.id);
         }}
       >
         <button onClick={() => {
