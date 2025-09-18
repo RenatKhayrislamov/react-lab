@@ -11,28 +11,32 @@ import { useState } from 'react';
 import { foods, filterItems, Item } from './data';
 
 export default function FilterableList() {
-  return (
-    <>
-      <SearchBar />
-      <hr />
-      <List items={foods} />
-    </>
-  );
-}
-
-function SearchBar() {
   const [query, setQuery] = useState('');
+  const filteredFoods = filterItems(foods, query);
 
   function handleChange(e: any) {
     setQuery(e.target.value);
   }
 
   return (
+    <>
+      <SearchBar
+        query={query}
+        onChange={handleChange}
+      />
+      <hr />
+      <List items={filteredFoods} />
+    </>
+  );
+}
+
+function SearchBar({ query, onChange }: { query: string, onChange: (e: any) => void }) {
+  return (
     <label>
       Search:{' '}
       <input
         value={query}
-        onChange={handleChange}
+        onChange={onChange}
       />
     </label>
   );
