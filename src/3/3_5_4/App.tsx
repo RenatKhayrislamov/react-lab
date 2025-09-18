@@ -5,7 +5,7 @@
   Чтобы проверить свои изменения, попробуйте ввести текст в поле ввода или выбрать контакт.
 */
 
-import { useReducer } from 'react';
+import { useReducer } from './MyReact.js';
 import Chat from './Chat';
 import ContactList from './ContactList';
 import { initialState, messengerReducer } from './messengerReducer';
