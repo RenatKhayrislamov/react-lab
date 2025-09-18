@@ -1,6 +1,6 @@
 export type State = {
     selectedId: number;
-    message: string;
+    messages: Map<number, string>;
 };
 
 export type Action = {
@@ -13,9 +13,13 @@ export type Action = {
     type: 'sent_message';
 };
 
-export const initialState = {
+export const initialState: State = {
     selectedId: 0,
-    message: 'Hello',
+    messages: new Map([
+        [0, 'Hello, Taylor'],
+        [1, 'Hello, Alice'],
+        [2, 'Hello, Bob']
+    ]),
 };
 
 export function messengerReducer(
@@ -27,23 +31,26 @@ export function messengerReducer(
             return {
                 ...state,
                 selectedId: action.contactId,
-                message: '',
             };
         }
         case 'edited_message': {
+            const newMessages = new Map(state.messages);
+            newMessages.set(state.selectedId, action.message);
             return {
                 ...state,
-                message: action.message,
+                messages: newMessages,
             };
         }
         case 'sent_message': {
+            const newMessages = new Map(state.messages);
+            newMessages.set(state.selectedId, '');
             return {
               ...state,
-              message: '',
+              messages: newMessages,
             };
-          }        
+          }
         default: {
-            throw Error('Unknown action: ' + action.type);
+            throw Error('Unknown action: ' + (action as Action).type);
         }
     }
 }
