@@ -3,17 +3,16 @@
   Если ввести сообщение и нажать "Отправить" то перед появлением сообщения "Отправлено!" произойдет трехсекундная задержка. Кнопка "Отменить" должна остановить появление сообщения "Отправлено!". Она делает это, вызывая clearTimeout для идентификатора таймаута, сохраненного во время handleSend. Однако даже после нажатия кнопки "Отменить" сообщение "Отправлено!" все равно появляется. Найдите причину неработоспособности и устраните ее.
 */
 
-import { useState } from 'react';
-import { getImageUrl } from "./utils"
+import { useState, useRef } from 'react';
 
 export default function Chat() {
   const [text, setText] = useState('');
   const [isSending, setIsSending] = useState(false);
-  let timeoutID = null;
+  const timeoutRef = useRef<number | null>(null);
 
   function handleSend() {
     setIsSending(true);
-    timeoutID = setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       alert('Отправлено!');
       setIsSending(false);
     }, 3000);
@@ -21,7 +20,9 @@ export default function Chat() {
 
   function handleUndo() {
     setIsSending(false);
-    clearTimeout(timeoutID);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   }
 
   return (
