@@ -8,10 +8,12 @@ import { useState, useRef } from 'react';
 
 export default function Chat() {
   const [text, setText] = useState('');
+  const textRef = useRef(text);
+  textRef.current = text;
 
   function handleSend() {
     setTimeout(() => {
-      alert('Sending: ' + text);
+      alert('Sending: ' + textRef.current);
     }, 3000);
   }
 
