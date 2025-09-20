@@ -3,13 +3,22 @@
   Сделайте так, чтобы нажатие на кнопку "Поиск" наводило фокус на поле.
 */
 
+import { useRef } from 'react';
+
 export default function Page() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  function handleClick() {
+    inputRef.current?.focus();
+  }
+
   return (
     <>
       <nav>
-        <button>Search</button>
+        <button onClick={handleClick}>Search</button>
       </nav>
       <input
+        ref={inputRef}
         placeholder="Looking for something?"
       />
     </>
