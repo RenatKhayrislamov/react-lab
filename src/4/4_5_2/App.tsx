@@ -12,12 +12,14 @@ export default function App() {
   const [canMove, setCanMove] = useState(true);
 
   useEffect(() => {
-    function handleMove(e) {
+    function handleMove(e: PointerEvent) {
       setPosition({ x: e.clientX, y: e.clientY });
     }
-    window.addEventListener('pointermove', handleMove);
-    return () => window.removeEventListener('pointermove', handleMove);
-  }, []);
+    if (canMove) {
+      window.addEventListener('pointermove', handleMove);
+      return () => window.removeEventListener('pointermove', handleMove);
+    }
+  }, [canMove]);
 
   return (
     <>
