@@ -13,9 +13,17 @@ import { usePointerPosition } from './usePointerPosition.ts';
 
 type Position = { x: number, y: number };
 
+import { useState, useEffect } from 'react';
+
 function useDelayedValue(value: Position, delay: number) {
-  // TODO: Implement this Hook
-  return value;
+  const [delayedValue, setDelayedValue] = useState(value);
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setDelayedValue(value);
+    }, delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
+  return delayedValue;
 }
 
 export default function Canvas() {
