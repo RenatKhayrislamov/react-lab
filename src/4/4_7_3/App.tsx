@@ -13,11 +13,6 @@ export default function App() {
   const [roomId, setRoomId] = useState('general');
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  const options = {
-    serverUrl: serverUrl,
-    roomId: roomId
-  };
-
   return (
     <div className={isDark ? 'dark' : 'light'}>
       <button onClick={() => setIsDark(!isDark)}>
@@ -42,7 +37,7 @@ export default function App() {
         </select>
       </label>
       <hr />
-      <ChatRoom options={options} />
+      <ChatRoom serverUrl={serverUrl} roomId={roomId} />
     </div>
   );
 }
